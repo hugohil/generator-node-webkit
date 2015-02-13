@@ -217,6 +217,23 @@ module.exports = function (grunt) {
           dest: '<%%= config.tmp %>/app.nw'
         }]
       }
+    },
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: 'app',
+          livereload: true
+        }
+      }
+    },
+    watch: {
+      all: {
+        files: ['app/**/*'],
+        options: {
+          livereload: true,
+        },
+      },
     }
   });
 
@@ -368,6 +385,11 @@ module.exports = function (grunt) {
 
   grunt.registerTask('check', [
     'jshint'
+  ]);
+
+  grunt.registerTask('browser', [
+    'connect',
+    'watch'
   ]);
 
   grunt.registerTask('dmg', 'Create dmg from previously created app folder in dist.', function () {
